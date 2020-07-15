@@ -9,6 +9,7 @@ import com.fakecorp.quizrest.core.Partie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 
 @RestController
@@ -26,8 +27,8 @@ public class MatchController implements IMatch {
 
 
 
-	@GetMapping("/estceBonneRep")
-	 public @ResponseBody boolean estceBonneRep(int repElue){
+	@PostMapping("/estceBonneRep")
+	 public @ResponseBody boolean estceBonneRep(@RequestBody int repElue){
 		 return match.estceBonneRep(repElue);
 	 }
 
@@ -109,6 +110,11 @@ public class MatchController implements IMatch {
 		return match.setBanqueFichier(ficheBanque);
 
 		
+	}
+
+	@PostMapping("/recoverData")
+	public void recoverData() {
+		this.match.getManche().recoverData();
 	}
 	 
 

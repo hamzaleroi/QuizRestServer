@@ -62,9 +62,6 @@ public class Partie {
 // charger une question dans le vecteur des questions � jouer dans la partie
 	public void setSerieQuestions(String [] uneQuestion) {
 
-		for (String s:uneQuestion){
-			System.out.println(s);
-		}
 		Question quest = new Question();
 		String [] rpPossible = new String[Question.nbRepQst];
 		quest.setEnonceQuestion(uneQuestion[0]);               //le texte de la question
@@ -87,15 +84,13 @@ public class Partie {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println("error");
-			System.out.println(serieQuestions);
-			System.out.println(questionRepository);
+
 		}
 
 	}
 
 	public void recoverData(){
-		this.serieQuestions.addAll(questionRepository.findAll());
+		this.serieQuestions = questionRepository.findAll();
 	}
 
 	public void setIdJoueur(String idJoueur) {
@@ -118,6 +113,7 @@ public class Partie {
 	
 // verifier la r�ponse
 	public boolean verifRep(int indxQuestion, int indxRepJoueur) {
+
 		boolean result = serieQuestions.get(indxQuestion).repJuste(indxRepJoueur); 
      	if (result) this.scorePartie++;                          //reponse juste augmente le score de la partie
 		return result;
